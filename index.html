@@ -5,13 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Syriano</title>
   <style>
+    /* تأكد من أن الـ html و body يشغلان كامل الصفحة */
+    html, body {
+      height: 100%; /*  تأكد من ملء الصفحة بالكامل */
+      margin: 0; /* إزالة أي هوامش */
+      padding: 0; /* إزالة أي حشوات */
+    }
+
     /* الخلفية الأساسية التي تظهر على الكمبيوتر */
     body {
       background-image: url('desk.png');
-      background-size: cover;
+      background-size: cover; /* تغطي الخلفية الشاشة بالكامل */
       background-position: center;
       background-repeat: no-repeat; /* منع التكرار */
-      margin: 0;
       font-family: sans-serif;
       color: #fff;
       text-align: center;
@@ -40,7 +46,7 @@
     @media (max-width: 768px) {
       body {
         background-image: url('phone.png');
-        background-size: cover;
+        background-size: cover; /* تغطي الخلفية الشاشة بالكامل */
         background-position: center;
         background-repeat: no-repeat; /* منع التكرار */
       }
