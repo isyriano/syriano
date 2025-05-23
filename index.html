@@ -1,67 +1,183 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Syriano</title>
+
+  <!-- Blood Font Substitute -->
+  <link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
   <style>
-    /* تأكد من أن الـ html و body يشغلان كامل الصفحة */
     html, body {
-      height: 100%; /* تأكد من ملء الصفحة بالكامل */
-      margin: 0; /* إزالة أي هوامش */
-      padding: 0; /* إزالة أي حشوات */
-      overflow-x: hidden; /* منع التمرير الأفقي */
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Nosifer', cursive;
+      color: #fff;
+      overflow: hidden;
+      background: black;
     }
 
-    /* الخلفية الأساسية التي تظهر على الكمبيوتر */
-    body {
-      background-image: url('desk.png');
-      background-size: cover; /* تغطي الخلفية الشاشة بالكامل */
-      background-position: center;
-      background-repeat: no-repeat; /* منع التكرار */
-      font-family: sans-serif;
-      color: #fff;
+    body::before {
+      content: "";
+      position: fixed;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, #6a0dad, #000);
+      animation: pulse 30s infinite;
+      z-index: -3;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    /* Starfield */
+    .stars {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: transparent url('https://i.imgur.com/w2bJgWM.png') repeat;
+      animation: moveStars 200s linear infinite;
+      z-index: -2;
+    }
+
+    @keyframes moveStars {
+      from { background-position: 0 0; }
+      to { background-position: -10000px 5000px; }
+    }
+
+    /* Smoke overlay */
+    .smoke {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: url('https://i.imgur.com/8bLk3gZ.png') repeat;
+      mix-blend-mode: lighten;
+      opacity: 0.08;
+      z-index: -1;
+      animation: drift 60s infinite linear;
+    }
+
+    @keyframes drift {
+      0% { background-position: 0 0; }
+      100% { background-position: 1000px 1000px; }
+    }
+
+    /* Planets */
+    .planet {
+      position: absolute;
+      border-radius: 50%;
+      animation: orbit 60s linear infinite;
+      z-index: -1;
+    }
+
+    .planet.one {
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle at 30% 30%, #f39c12, #e67e22);
+      top: 20%;
+      left: 10%;
+    }
+
+    .planet.two {
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle at 30% 30%, #3498db, #2c3e50);
+      bottom: 15%;
+      right: 20%;
+      animation-duration: 80s;
+    }
+
+    @keyframes orbit {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+
+    .container {
       text-align: center;
-      min-height: 100vh; /* تأكد أن الجسم يغطي 100% من ارتفاع الشاشة */
+      position: relative;
+      z-index: 10;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     h1 {
-      margin-bottom: 20px;
+      font-size: 3.5em;
+      margin-bottom: 0.3em;
+      color: #bb86fc;
+      text-shadow: 0 0 20px #bb86fc;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
     }
 
     .links a {
       display: inline-block;
       margin: 10px;
-      padding: 10px 20px;
+      padding: 12px 24px;
       color: white;
-      background-color: #1f6feb;
+      background-color: #7b2cbf;
+      border: none;
+      border-radius: 12px;
       text-decoration: none;
-      border-radius: 10px;
+      font-size: 1.1em;
+      transition: 0.3s;
     }
 
     .links a:hover {
-      background-color: #388bfd;
+      background-color: #9d4edd;
+      transform: scale(1.1);
+      box-shadow: 0 0 15px #bb86fc;
     }
 
-    /* خلفية الهاتف المحمول */
-    @media (max-width: 768px) {
-      body {
-        background-image: url('phone.png');
-        background-size: cover; /* تغطي الخلفية الشاشة بالكامل */
-        background-position: center;
-        background-repeat: no-repeat; /* منع التكرار */
-      }
+    .links a i {
+      margin-right: 10px;
     }
+
+    /* Music */
+    .audio-control {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      z-index: 100;
+    }
+
   </style>
 </head>
 <body>
-  <h1>{𝐒𝐲𝐫𝐢𝐚𝐧𝐨}</h1>
-  <p>Follow me :</p>
-  <div class="links">
-    <a href="https://instagram.com/fa3.r" target="_blank">Instagram</a>
-    <a href="https://web.facebook.com/syria.fa3ory" target="_blank">Facebook</a>
-    <a href="https://t.me/@IISyriano" target="_blank">Telegram</a>
-    <a href="mailto:firemrgamer1@gmail.com">Email</a>
+  <!-- Background Elements -->
+  <div class="stars"></div>
+  <div class="smoke"></div>
+  <div class="planet one"></div>
+  <div class="planet two"></div>
+
+  <!-- Content -->
+  <div class="container">
+    <h1>Syriano</h1>
+    <p>Connect with me</p>
+    <div class="links">
+      <a href="https://instagram.com/fa3.r" target="_blank"><i class="fab fa-instagram"></i>Instagram</a>
+      <a href="https://web.facebook.com/syria.fa3ory" target="_blank"><i class="fab fa-facebook"></i>Facebook</a>
+      <a href="https://t.me/@IISyriano" target="_blank"><i class="fab fa-telegram"></i>Telegram</a>
+      <a href="mailto:firemrgamer1@gmail.com"><i class="fas fa-envelope"></i>Email</a>
+    </div>
+  </div>
+
+  <!-- Audio -->
+  <div class="audio-control">
+    <audio autoplay loop controls>
+      <source src="https://cdn.pixabay.com/audio/2022/11/03/audio_4d045e5e64.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
   </div>
 </body>
 </html>
